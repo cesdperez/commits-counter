@@ -6,6 +6,16 @@ import subprocess
 
 
 def get_commit_count(directory, author, begin_date=None, end_date=None):
+    """
+    Scans the provided directory and all its subdirectories for git repositories.
+    For each repository, counts the number of commits made by the provided author on the 'main' branch
+    between the provided start and end date.
+
+    :param directory: The directory to start scanning.
+    :param author: The name of the author to filter commits by.
+    :param begin_date: The start date to filter commits by. Optional.
+    :param end_date: The end date to filter commits by. Optional.
+    """
     commit_count = 0
     repo_commits = {}
     try:
