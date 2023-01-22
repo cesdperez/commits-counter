@@ -3,6 +3,14 @@
 Scans the provided directory and all its subdirectories for git repositories.
 For each repository, counts the number of commits made by the provided author on the `main` branch between the provided start and end date.
 
+## Setup
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+
 See `./commits_counter.py --help`
 
 Example usage:
