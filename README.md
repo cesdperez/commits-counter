@@ -15,7 +15,7 @@ See `./commits_counter.py --help`
 
 Example usage:
 ```bash
-./git_commits_scanner.py ~/projects/ 'Jon' -b '2022-03-20' -e '2023-01-20'
+./commits_counter.py ~/projects/ 'Jon' -b '2022-03-20' -e '2023-01-20'
 ```
 
 Example output:
