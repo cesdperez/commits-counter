@@ -24,7 +24,10 @@ def get_commit_count(directory, author, exclude_dirs=[]):
             try:
                 output = subprocess.check_output(
                     command, shell=True, stderr=subprocess.DEVNULL)
-                repo_commit_count = len(output.strip().split(b'\n'))
+                if (len(output) == 0):
+                    repo_commit_count = 0
+                else:
+                    repo_commit_count = len(output.strip().split(b'\n'))
                 commit_count += repo_commit_count
                 repo_commits[root] = repo_commit_count
             except subprocess.CalledProcessError as e:
@@ -35,7 +38,8 @@ def get_commit_count(directory, author, exclude_dirs=[]):
         repo_commits.items(), key=lambda x: x[1], reverse=True)
     for repo, commits in sorted_repo_commits:
         if commits > 0:
-            print(f"Commits in {repo}: {commits}")
+            percentage = (commits / commit_count) * 100
+            print(f"Commits in {repo}: {commits} ({percentage:.2f}%)")
 
 
 if __name__ == '__main__':
