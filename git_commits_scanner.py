@@ -5,7 +5,7 @@ import os
 import subprocess
 
 
-def get_commit_count(directory, author, exclude_dirs=[]):
+def get_commit_count(directory, author):
     commit_count = 0
     repo_commits = {}
     try:
@@ -15,12 +15,8 @@ def get_commit_count(directory, author, exclude_dirs=[]):
         return
     for root, dirs, files in os.walk(directory):
         if '.git' in dirs:
-            should_exclude = any(
-                exclude_dir in root for exclude_dir in exclude_dirs)
-            if should_exclude:
-                continue
             os.chdir(root)
-            command = f"git log --author={author} --pretty=format:'%h'"
+            command = f"git log main --author={author} --pretty=format:'%h'"
             try:
                 output = subprocess.check_output(
                     command, shell=True, stderr=subprocess.DEVNULL)
