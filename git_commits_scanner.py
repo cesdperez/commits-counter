@@ -5,7 +5,7 @@ import os
 import subprocess
 
 
-def get_commit_count(directory, author):
+def get_commit_count(directory, author, begin_date=None, end_date=None):
     commit_count = 0
     repo_commits = {}
     try:
@@ -17,6 +17,10 @@ def get_commit_count(directory, author):
         if '.git' in dirs:
             os.chdir(root)
             command = f"git log main --author={author} --pretty=format:'%h'"
+            if begin_date:
+                command += f" --since={begin_date}"
+            if end_date:
+                command += f" --until={end_date}"
             try:
                 output = subprocess.check_output(
                     command, shell=True, stderr=subprocess.DEVNULL)
